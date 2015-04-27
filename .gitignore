@@ -27,8 +27,8 @@
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+/web/bundles/*
+/web/uploads/*
 !/web/bundles/.gitkeep
 !/web/uploads/.gitkeep
 
