@@ -3,30 +3,36 @@
 {% block body -%}
 <h2>Brand list</h2>
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Banner</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('brand_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.banners|length }}</td>
-            <td>
-            <ul>
-                <li>
-                    <a href="{{ path('brand_show', { 'id': entity.id }) }}">show</a>
-                </li>
-            </ul></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="col-75">
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Banner</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('brand_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td class="label">{{ entity.name }}</td>
+                <td class="count">{{ entity.banners|length }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('brand_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-25">
+    <canvas id="chart"></canvas>
+</div>
 
 {% endblock %}
