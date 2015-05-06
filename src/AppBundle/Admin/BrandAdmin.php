@@ -15,6 +15,7 @@ class BrandAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', 'text');
+        $formMapper->add('slug', 'text');
     }
 
     /**
@@ -23,6 +24,7 @@ class BrandAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
+        $datagridMapper->add('slug');
     }
 
     /**
@@ -31,6 +33,7 @@ class BrandAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('slug');
     }
 
 }
