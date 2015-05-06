@@ -16,15 +16,13 @@ class BannerAdmin extends Admin
     {
         $formMapper->with('Banner');
         $formMapper->add('title', 'text');
+        $formMapper->add('path', 'text', array('read_only' => true));
+        $formMapper->add('file', 'file', array('required' => false));
         $formMapper->end();
 
         $formMapper->with('Relations');
         $formMapper->add('category');
         $formMapper->add('brand');
-        $formMapper->end();
-
-        $formMapper->with('Generated');
-        $formMapper->add('embedCode', 'textarea', array('read_only' => true));
         $formMapper->end();
     }
 
@@ -48,22 +46,7 @@ class BannerAdmin extends Admin
         $listMapper->addIdentifier('title');
         $listMapper->addIdentifier('category');
         $listMapper->addIdentifier('brand');
-    }
-
-    /**
-     *
-     */
-    public function preUpdate($banner)
-    {
-        $banner->setEmbedCode('<div>new embed code</div>');
-    }
-
-    /**
-     *
-     */
-    public function prePersist($banner)
-    {
-        $banner->setEmbedCode('<div>new embed code</div>');
+        $listMapper->add('webPath');
     }
 
 }

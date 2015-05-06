@@ -28,9 +28,9 @@
 
 # Assets and user uploads
 /web/bundles/*
-/web/uploads/*
+/web/uploads/banner/*
+!/web/uploads/banner/.gitkeep
 !/web/bundles/.gitkeep
-!/web/uploads/.gitkeep
 
 # PHPUnit
 /app/phpunit.xml
