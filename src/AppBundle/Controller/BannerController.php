@@ -45,7 +45,7 @@ class BannerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AppBundle:Banner')->find($id);
-        $webroot = dirname($this->get('request')->getBasePath()).'/';
+        $webroot = $this->get('request')->getBasePath().'/';
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Banner entity.');
