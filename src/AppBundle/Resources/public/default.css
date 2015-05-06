@@ -10,3 +10,21 @@
     font-size: 20px !important;
     border: none !important;
 }
+
+.records_list th {
+    font-weight: bold;
+}
+
+.col-75 {
+    width: 75%;
+    float: left;
+}
+
+.col-25 {
+    width: 20%;
+    float: left;
+}
+
+.clear {
+    clear: both;
+}

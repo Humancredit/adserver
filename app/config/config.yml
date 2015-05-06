@@ -84,7 +84,6 @@ doctrine:
         #            ApplicationSonataUserBundle: ~
         #            SonataUserBundle: ~
         #            FOSUserBundle: ~
-
         
 # Sonata Configuration
 sonata_block:

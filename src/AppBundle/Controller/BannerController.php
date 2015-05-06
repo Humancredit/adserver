@@ -48,34 +48,20 @@ class BannerController extends Controller
         $webroot = $this->get('request')->getBasePath().'/';
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Banner entity.');
-        }
+            throw $this->createNotFoundException('Unable to find Banner entity.' );
+            }
 
-        $log = new BannerLog();
-        $log->setBanner($entity);
-        $em->persist($log);
-        $em->flush();
+            $log = new BannerLog();
+            $log->setBanner($entity);
+            $em->persist($log);
+            $em->flush();
+        // :TODO: key is user specific
+        $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
 
         return array(
             'entity' => $entity,
-            'signedUrl' => $this->generateSignedUrl($entity, $webroot)
+            'signedUrl' => $this->get('app.utils')->generateSignedUrl($entity, $webroot, $key)
         );
-    }
-
-    /**
-     *
-     */
-    private function generateSignedUrl($entity, $webroot)
-    {
-        header("Content-Type: application/json");
-
-        $url = $webroot.$entity->getWebPath();
-        $url .= "?hc_c=".$entity->getCategory()->getSlug();
-        $url .= "&hc_b=".$entity->getBrand()->getSlug();
-        $pkeyid = openssl_pkey_get_private("file://".$this->get('kernel')->getRootDir().'/data/private.key');
-        openssl_sign($url, $signature, $pkeyid, "sha256WithRSAEncryption");
-        openssl_free_key($pkeyid);
-        return $url."&hc_s=".bin2hex($signature);
     }
 
 }

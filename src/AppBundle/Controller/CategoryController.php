@@ -2,12 +2,13 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Category;
+use AppBundle\Controller\BannerController;
+use AppBundle\Entity\BannerLog;
 
 /**
  * Category controller.
@@ -30,9 +31,7 @@ class CategoryController extends Controller
 
         $entities = $em->getRepository('AppBundle:Category')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return array('entities' => $entities, );
     }
 
     /**
@@ -45,15 +44,26 @@ class CategoryController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('AppBundle:Category')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        return array(
-            'entity'      => $entity,
-        );
+        $data = array('entity' => $entity);
+        $bannerCount = $entity->getBanners()->count();
+        if ($bannerCount) {
+            $webroot = $this->get('request')->getBasePath().'/';
+            $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
+            $data['banner'] = $entity->getBanners()->get(rand(0, $bannerCount - 1));
+            $data['signedUrl'] = $this->get('app.utils')->generateSignedUrl($data['banner'], $webroot, $key);
+
+            $log = new BannerLog();
+            $log->setBanner($data['banner']);
+            $em->persist($log);
+            $em->flush();
+        }
+
+        return $data;
     }
+
 }

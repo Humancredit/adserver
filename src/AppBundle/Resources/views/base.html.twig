@@ -19,6 +19,7 @@
                         <li class="active">
                             <a href="{{ url('homepage') }}">AdServer</a>
                         </li>
+                        {% if app.user %}
                         <li class="inactive">
                             <a href="{{ url('banner') }}">Banner</a>
                         </li>
@@ -28,7 +29,6 @@
                         <li class="inactive">
                             <a href="{{ url('brand') }}">Brands</a>
                         </li>
-                        {% if app.user %}
                         <li class="inactive">
                             <a href="{{ url('sonata_admin_dashboard') }}">CMS</a>
                         </li>
@@ -52,7 +52,7 @@
                 </div>
             </section>
         </main>
-        
+
         <footer id="footer" class="align-center">
             <div class="wrap">
                 <nav>
@@ -86,6 +86,8 @@
             </div>
         </footer>
 
-        {% block javascripts %}{% endblock %}
+        <script src="{{ asset('bundles/app/lib/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/app/lib/Chart.min.js') }}"></script>
+        <script src="{{ asset('bundles/app/code.js') }}"></script>
     </body>
 </html>

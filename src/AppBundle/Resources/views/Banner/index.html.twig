@@ -1,8 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body -%}
-    <h2>Banner list</h2>
+<h2>Banner List</h2>
 
+<div class="col-75">
     <table class="records_list">
         <thead>
             <tr>
@@ -10,26 +11,33 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Brand</th>
-                <th>Actions</th>
+                <th>Views</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
+            {% for entity in entities %}
+            <tr id="entity-{{ entity.id }}">
                 <td><a href="{{ path('banner_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.title }}</td>
+                <td class="label">{{ entity.title }}</td>
                 <td>{{ entity.category }}</td>
                 <td>{{ entity.brand }}</td>
+                <td class="count">{{ entity.logs|length }}</td>
                 <td>
                 <ul>
                     <li>
                         <a href="{{ path('banner_show', { 'id': entity.id }) }}">show</a>
                     </li>
-                </ul>
-                </td>
+                </ul></td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
+</div>
 
-    {% endblock %}
+<div class="col-25">
+    <br />
+    <canvas id="chart"></canvas>
+</div>
+
+{% endblock %}
