@@ -7,21 +7,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use AppBundle\Entity\Banner;
 use AppBundle\Entity\BannerLog;
 
 /**
- * Banner controller.
+ * BannerLog controller.
  *
  * @Route("/banner")
  */
-class BannerController extends Controller
+class BannerLogController extends Controller
 {
 
     /**
-     * Lists all Banner entities.
+     * Lists all BannerLog entities.
      *
-     * @Route("/", name="banner")
+     * @Route("/", name="banner_log")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Method("GET")
      * @Template()
@@ -29,14 +28,14 @@ class BannerController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AppBundle:Banner')->findAll();
+        $entities = $em->getRepository('AppBundle:BannerLog')->findAll();
         return array('entities' => $entities, );
     }
 
     /**
-     * Finds and displays a Banner entity.
+     * Finds and displays a BannerLog entity.
      *
-     * @Route("/{id}", name="banner_show")
+     * @Route("/{id}", name="banner_log_show")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Method("GET")
      * @Template()
@@ -44,22 +43,13 @@ class BannerController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Banner')->find($id);
-        $webroot = dirname($this->get('request')->getBasePath()).'/';
+        $entity = $em->getRepository('AppBundle:BannerLog')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Banner entity.');
+            throw $this->createNotFoundException('Unable to find BannerLog entity.');
         }
 
-        $log = new BannerLog();
-        $log->setBanner($entity);
-        $em->persist($log);
-        $em->flush();
-
-        return array(
-            'entity' => $entity,
-            'webroot' => $webroot
-        );
+        return array('entity' => $entity);
     }
 
 }

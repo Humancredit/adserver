@@ -19,3 +19,10 @@ services:
         arguments: [~, AppBundle\Entity\Brand, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "AdServer", label: "Brand" }
+
+    # BannerLogs
+    app.admin.banner_log:
+        class: AppBundle\Admin\BannerLogAdmin
+        arguments: [~, AppBundle\Entity\BannerLog, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Activities", label: "Logs" }

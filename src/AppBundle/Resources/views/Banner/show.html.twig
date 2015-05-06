@@ -1,26 +1,19 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body -%}
-    <h1>Banner</h1>
+<h2>Banner (id: {{ entity. id }})</h2>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ entity.title }}</td>
-            </tr>
-        </tbody>
-    </table>
+<p>
+    <img src="{{ webroot }}{{ entity.webPath }}?id=1" />
+</p>
 
-        <ul class="record_actions">
+<h3>Logs</h3>
+
+<ul class="logs">
+    {% for log in entity.logs %}
     <li>
-        <a href="{{ path('banner') }}">
-            Back to the list
-        </a>
+        {{ log.created|date('Y-m-d H:i:s') }}
     </li>
+    {% endfor %}
 </ul>
 {% endblock %}

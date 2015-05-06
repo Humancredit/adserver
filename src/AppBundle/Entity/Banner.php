@@ -49,6 +49,11 @@ class Banner
     private $brand;
 
     /**
+     * @ORM\OneToMany(targetEntity="BannerLog", mappedBy="banner")
+     */
+    private $logs;
+
+    /**
      * @Assert\File(maxSize="6000000", mimeTypes={"image/*"})
      */
     private $file;
@@ -280,6 +285,47 @@ class Banner
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->logs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add logs
+     *
+     * @param \AppBundle\Entity\BannerLog $logs
+     * @return Banner
+     */
+    public function addLog(\AppBundle\Entity\BannerLog $logs)
+    {
+        $this->logs[] = $logs;
+
+        return $this;
+    }
+
+    /**
+     * Remove logs
+     *
+     * @param \AppBundle\Entity\BannerLog $logs
+     */
+    public function removeLog(\AppBundle\Entity\BannerLog $logs)
+    {
+        $this->logs->removeElement($logs);
+    }
+
+    /**
+     * Get logs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLogs()
+    {
+        return $this->logs;
     }
 
 }

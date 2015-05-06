@@ -1,1 +1,7 @@
-/* placeholder */
+.logs {
+    padding-left: 20px;
+}
+
+.logs li {
+    font-size: 10px;
+}
