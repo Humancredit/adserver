@@ -29,6 +29,13 @@ class Brand
     private $name;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity="Banner", mappedBy="brand")
      */
     private $banners;
@@ -114,5 +121,28 @@ class Brand
     public function getBanners()
     {
         return $this->banners;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Brand
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

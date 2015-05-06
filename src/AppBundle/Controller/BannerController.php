@@ -58,8 +58,24 @@ class BannerController extends Controller
 
         return array(
             'entity' => $entity,
-            'webroot' => $webroot
+            'signedUrl' => $this->generateSignedUrl($entity, $webroot)
         );
+    }
+
+    /**
+     *
+     */
+    private function generateSignedUrl($entity, $webroot)
+    {
+        header("Content-Type: application/json");
+
+        $url = $webroot.$entity->getWebPath();
+        $url .= "?hc_c=".$entity->getCategory()->getSlug();
+        $url .= "&hc_b=".$entity->getBrand()->getSlug();
+        $pkeyid = openssl_pkey_get_private("file://".$this->get('kernel')->getRootDir().'/data/private.key');
+        openssl_sign($url, $signature, $pkeyid, "sha256WithRSAEncryption");
+        openssl_free_key($pkeyid);
+        return $url."&hc_s=".bin2hex($signature);
     }
 
 }
