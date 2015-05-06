@@ -7,20 +7,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use AppBundle\Entity\Banner;
+use AppBundle\Entity\Brand;
 
 /**
- * Banner controller.
+ * Brand controller.
  *
- * @Route("/banner")
+ * @Route("/brand")
  */
-class BannerController extends Controller
+class BrandController extends Controller
 {
 
     /**
-     * Lists all Banner entities.
+     * Lists all Brand entities.
      *
-     * @Route("/", name="banner")
+     * @Route("/", name="brand")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Method("GET")
      * @Template()
@@ -28,14 +28,14 @@ class BannerController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AppBundle:Banner')->findAll();
+        $entities = $em->getRepository('AppBundle:Brand')->findAll();
         return array('entities' => $entities, );
     }
 
     /**
-     * Finds and displays a Banner entity.
+     * Finds and displays a Brand entity.
      *
-     * @Route("/{id}", name="banner_show")
+     * @Route("/{id}", name="brand_show")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Method("GET")
      * @Template()
@@ -43,9 +43,9 @@ class BannerController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Banner')->find($id);
+        $entity = $em->getRepository('AppBundle:Brand')->find($id);
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Banner entity.');
+            throw $this->createNotFoundException('Unable to find Brand entity.');
         }
         return array('entity' => $entity, );
     }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://www.humancredit.cc/_framework/_css/style.css" />
+        <link rel="stylesheet" href="{{ asset('bundles/app/default.css') }}" />
+    </head>
+    <body>
+        <header id="header">
+            <div class="wrap">
+                <nav>
+                    <a class="logo" href="/">
+                        <img src="https://www.humancredit.cc/_media/_images/svg/logo-humancredit.svg"/>
+                    </a>
+                    <ul>
+                        <li class="active">
+                            <a href="{{ url('homepage') }}">AdServer</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="{{ url('banner') }}">Banner</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="{{ url('category') }}">Categories</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="{{ url('brand') }}">Brands</a>
+                        </li>
+                        {% if app.user %}
+                        <li class="inactive">
+                            <a href="{{ url('sonata_admin_dashboard') }}">CMS</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="{{ url('fos_user_security_logout') }}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="inactive">
+                            <a href="{{ url('fos_user_security_login')}}">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="size-medium tight">
+                <div class="wrap">
+                    {% block body %}{% endblock %}
+                </div>
+            </section>
+        </main>
+        
+        <footer id="footer" class="align-center">
+            <div class="wrap">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/disclaimer">Disclaimer</a>
+                        </li>
+                        <li>
+                            <a href="/terms-and-conditions">Terms and Conditions</a>
+                        </li>
+                        <li>
+                            <a href="/privacy">Privacy</a>
+                        </li>
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/newsletter">Newsletter</a>
+                        </li>
+                        <li>
+                            <a href="/contributors">Contributors</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/humancredit">Facebook</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/humancredit">Twitter</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
