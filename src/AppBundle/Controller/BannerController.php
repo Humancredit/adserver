@@ -68,8 +68,8 @@ class BannerController extends Controller
 
         // embed code
         $url = $this->get('router')->generate('banner_embed', array('id' => $entity->getId()), true);
-        $url .= "?c=".$entity->getCategory()->getSlug();
-        $url .= "&b=".$entity->getBrand()->getSlug();
+        $url .= "?ct=".$entity->getCategory()->getSlug();
+        $url .= "&br=".$entity->getBrand()->getSlug();
         $embedCode = $this->get('app.utils')->generateEmbedCode($url, $key);
 
         // put everything together
@@ -91,44 +91,11 @@ class BannerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AppBundle:Banner')->find($id);
-        $webroot = $this->get('request')->getBasePath().'/';
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Banner entity.');
         }
 
-        $log = new BannerLog();
-        $log->setBanner($entity);
-        $em->persist($log);
-        $em->flush();
-
-        // :TODO: key is user specific
-        $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
-
-        // image url
-        $url = $webroot.$entity->getWebPath();
-        $url .= "?c=".$entity->getCategory()->getSlug();
-        $url .= "&b=".$entity->getBrand()->getSlug();
-        $signedImage = $this->get('app.utils')->generateSignedUrl($url, $key);
-
-        // link url
-        $url = $this->get('router')->generate('banner_click', array('id' => $entity->getId()), true);
-        $url .= "?c=".$entity->getCategory()->getSlug();
-        $url .= "&b=".$entity->getBrand()->getSlug();
-        $signedLink = $this->get('app.utils')->generateSignedUrl($url, $key);
-
-        // feedback url
-        $url = $this->get('router')->generate('banner_feedback', array('id' => $entity->getId()), true);
-        $url .= "?c=".$entity->getCategory()->getSlug();
-        $url .= "&b=".$entity->getBrand()->getSlug();
-        $signedFeedback = $this->get('app.utils')->generateSignedUrl($url, $key);
-
-        return array(
-            'entity' => $entity,
-            'signedLink' => $signedLink,
-            'signedFeedback' => $signedFeedback,
-            'signedImage' => $signedImage
-        );
+        return $this->prepareBanner($entity);
     }
 
     /**
@@ -187,6 +154,48 @@ class BannerController extends Controller
         $response = new Response(json_encode($response));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
+    }
+
+    /**
+     * prepare a banner for html output (generating signed urls, log view etc.)
+     */
+    public function prepareBanner($entity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $webroot = $this->get('request')->getBasePath().'/';
+
+        $log = new BannerLog();
+        $log->setBanner($entity);
+        $em->persist($log);
+        $em->flush();
+
+        // :TODO: key is user specific
+        $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
+
+        // image url
+        $url = $webroot.$entity->getWebPath();
+        $url .= "?ct=".$entity->getCategory()->getSlug();
+        $url .= "&br=".$entity->getBrand()->getSlug();
+        $signedImage = $this->get('app.utils')->generateSignedUrl($url, $key);
+
+        // link url
+        $url = $this->get('router')->generate('banner_click', array('id' => $entity->getId()), true);
+        $url .= "?ct=".$entity->getCategory()->getSlug();
+        $url .= "&br=".$entity->getBrand()->getSlug();
+        $signedLink = $this->get('app.utils')->generateSignedUrl($url, $key);
+
+        // feedback url
+        $url = $this->get('router')->generate('banner_feedback', array('id' => $entity->getId()), true);
+        $url .= "?ct=".$entity->getCategory()->getSlug();
+        $url .= "&br=".$entity->getBrand()->getSlug();
+        $signedFeedback = $this->get('app.utils')->generateSignedUrl($url, $key);
+
+        return array(
+            'banner' => $entity,
+            'signedLink' => $signedLink,
+            'signedFeedback' => $signedFeedback,
+            'signedImage' => $signedImage
+        );
     }
 
 }

@@ -1,3 +1,17 @@
+.logo {
+    position: relative;
+}
+
+.logo span {
+    position: absolute;
+    top: 37px;
+    right: -20px;
+    display: block;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .toc {
     padding-left: 40px;
 }

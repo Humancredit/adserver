@@ -6,6 +6,13 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "AdServer", label: "Banner" }
 
+    # Campaigns
+    app.admin.campaign:
+        class: AppBundle\Admin\CampaignAdmin
+        arguments: [~, AppBundle\Entity\Campaign, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "AdServer", label: "Campaign" }
+
     # Categories
     app.admin.category:
         class: AppBundle\Admin\CategoryAdmin
@@ -26,3 +33,17 @@ services:
         arguments: [~, AppBundle\Entity\BannerLog, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Activities", label: "Logs" }
+
+    # BannerClicks
+    app.admin.banner_click:
+        class: AppBundle\Admin\BannerClickAdmin
+        arguments: [~, AppBundle\Entity\BannerClick, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Activities", label: "Clicks" }
+
+    # BannerFeedbacks
+    app.admin.banner_feedback:
+        class: AppBundle\Admin\BannerFeedbackAdmin
+        arguments: [~, AppBundle\Entity\BannerFeedback, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Activities", label: "Feedbacks" }            

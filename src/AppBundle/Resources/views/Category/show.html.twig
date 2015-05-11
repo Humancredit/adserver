@@ -20,13 +20,60 @@
     </tbody>
 </table>
 
+<h3>Banner</h3>
+<div class="col-75">
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Campaign</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Views</th>
+                <th>Clicks</th>
+                <th>Feedbacks</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entity.banners %}
+            <tr id="entity-{{ entity.id }}">
+                <td><a href="{{ path('banner_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td class="label">{{ entity.title }}</td>
+                <td>{{ entity.campaign }}</td>
+                <td>{{ entity.category }}</td>
+                <td>{{ entity.brand }}</td>
+                <td class="count">{{ entity.logs|length }}</td>
+                <td>{{ entity.clicks|length }}</td>
+                <td>{{ entity.feedbacks|length }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('banner_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-25">
+    <canvas id="chart"></canvas>
+</div>
+
 <hr />
 
-<h3>Random Banner(id: {{ banner.id }})</h3>
+<h3>Random Banner</h3>
 
-<p>
-    <img src="{{ signedUrl }}" />
-</p>
+<h3 class="clear" id="embed-code">EmbedCode</h3>
+<code>
+    {{ embedCode }}
+</code>
+
+<h3 id="example">Example</h3>
+{{ embedCode|raw }}
 
 <ul class="record_actions">
     <li>

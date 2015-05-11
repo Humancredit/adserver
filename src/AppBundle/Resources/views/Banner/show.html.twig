@@ -4,6 +4,25 @@
 <div class="banner show">
     <h2>Banner (id: {{ entity. id }})</h2>
 
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ entity.category }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ entity.brand }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Summary</h3>
+
     <div class="col-75">
         <ul class="toc">
             <li>
@@ -91,6 +110,12 @@
             {{ log.created|date('Y-m-d H:i:s') }}
         </li>
         {% endfor %}
+    </ul>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('banner') }}"> Back to the list </a>
+        </li>
     </ul>
 </div>
 {% endblock %}

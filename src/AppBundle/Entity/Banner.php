@@ -41,6 +41,13 @@ class Banner
     private $path;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Campaign", inversedBy="banners")
+     * @ORM\JoinColumn(name="campaign_id", referencedColumnName="id")
+     * @var \AppBundle\Entity\Campaign
+     */
+    private $campaign;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="banners")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * @var \AppBundle\Entity\Category
@@ -433,5 +440,28 @@ class Banner
     public function getFeedbacks()
     {
         return $this->feedbacks;
+    }
+
+    /**
+     * Set campaign
+     *
+     * @param \AppBundle\Entity\Campaign $campaign
+     * @return Banner
+     */
+    public function setCampaign(\AppBundle\Entity\Campaign $campaign = null)
+    {
+        $this->campaign = $campaign;
+
+        return $this;
+    }
+
+    /**
+     * Get campaign
+     *
+     * @return \AppBundle\Entity\Campaign 
+     */
+    public function getCampaign()
+    {
+        return $this->campaign;
     }
 }

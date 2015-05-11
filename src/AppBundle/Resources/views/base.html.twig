@@ -14,14 +14,15 @@
                 <nav>
                     <a class="logo" href="/">
                         <img src="https://www.humancredit.cc/_media/_images/svg/logo-humancredit.svg"/>
-                    </a>
+                        <br />
+                        <span>AdServer</span> </a>
                     <ul>
-                        <li class="active">
-                            <a href="{{ url('homepage') }}">AdServer</a>
-                        </li>
                         {% if app.user %}
                         <li class="inactive">
                             <a href="{{ url('banner') }}">Banner</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="{{ url('campaign') }}">Campaigns</a>
                         </li>
                         <li class="inactive">
                             <a href="{{ url('category') }}">Categories</a>

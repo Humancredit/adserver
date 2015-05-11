@@ -22,6 +22,7 @@ class BannerAdmin extends Admin
         $formMapper->end();
 
         $formMapper->with('Relations');
+        $formMapper->add('campaign');
         $formMapper->add('category');
         $formMapper->add('brand');
         $formMapper->end();
@@ -34,6 +35,7 @@ class BannerAdmin extends Admin
     {
         $datagridMapper->add('id');
         $datagridMapper->add('title');
+        $datagridMapper->add('campaign');
         $datagridMapper->add('category');
         $datagridMapper->add('brand');
     }
@@ -45,6 +47,7 @@ class BannerAdmin extends Admin
     {
         $listMapper->addIdentifier('id');
         $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('campaign');
         $listMapper->addIdentifier('category');
         $listMapper->addIdentifier('brand');
         $listMapper->add('webPath');

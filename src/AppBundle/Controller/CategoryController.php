@@ -51,18 +51,45 @@ class CategoryController extends Controller
         $data = array('entity' => $entity);
         $bannerCount = $entity->getBanners()->count();
         if ($bannerCount) {
-            $webroot = $this->get('request')->getBasePath().'/';
+            // embed code
             $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
-            $data['banner'] = $entity->getBanners()->get(rand(0, $bannerCount - 1));
-            $data['signedUrl'] = $this->get('app.utils')->generateSignedUrl($data['banner'], $webroot, $key);
-
-            $log = new BannerLog();
-            $log->setBanner($data['banner']);
-            $em->persist($log);
-            $em->flush();
+            $url = $this->get('router')->generate('category_embed', array('id' => $entity->getId()), true);
+            $url .= '?ct='.$entity->getSlug();
+            $data['embedCode'] = $this->get('app.utils')->generateEmbedCode($url, $key);
         }
 
         return $data;
+    }
+
+    /**
+     * Embed a category entity
+     *
+     * @Route("/{id}/embed", name="category_embed")
+     * @Method("GET")
+     * @Template()
+     */
+    public function embedAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Category')->find($id);
+        $webroot = $this->get('request')->getBasePath().'/';
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Brand entity.');
+        }
+
+        $bC = $this->get('app.banner_controller');
+        $bC->setContainer($this->container);
+        $bannerCount = $entity->getBanners()->count();
+        if ($bannerCount) {
+            $banner = $entity->getBanners()->get(rand(0, $bannerCount - 1));
+            $banner = $bC->prepareBanner($banner);
+        }
+
+        if ($banner) {
+            return array_merge(array('entity' => $entity), $banner);
+        }
+        return array('entity' => $entity);
     }
 
 }
