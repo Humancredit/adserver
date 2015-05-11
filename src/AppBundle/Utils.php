@@ -14,15 +14,21 @@ class Utils
     /**
      *
      */
-    public function generateSignedUrl($banner, $webroot, $key)
+    public function generateSignedUrl($url, $key)
     {
-        $url = $webroot.$banner->getWebPath();
-        $url .= "?hc_c=".$banner->getCategory()->getSlug();
-        $url .= "&hc_b=".$banner->getBrand()->getSlug();
         $pkeyid = openssl_pkey_get_private($key);
         openssl_sign($url, $signature, $pkeyid, "sha256WithRSAEncryption");
         openssl_free_key($pkeyid);
-        return $url."&hc_s=".bin2hex($signature);
+        return $url.(strpos($url, "?") !== false ? "&" : "?")."s=".bin2hex($signature);
+    }
+
+    /**
+     *
+     */
+    public function generateEmbedCode($url, $key)
+    {
+        $url = $this->generateSignedUrl($url, $key);
+        return '<iframe class="humancredit" seamless="seamless" frameborder="0" style="width:728px;height:90px" scrolling="no" src="'.$url.'"></iframe>';
     }
 
 }

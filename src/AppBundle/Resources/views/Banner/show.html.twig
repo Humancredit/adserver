@@ -1,19 +1,96 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body -%}
-<h2>Banner (id: {{ entity. id }})</h2>
+<div class="banner show">
+    <h2>Banner (id: {{ entity. id }})</h2>
 
-<p>
-    <img src="{{ signedUrl }}" />
-</p>
+    <div class="col-75">
+        <ul class="toc">
+            <li>
+                <a href="#embed-code">EmbedCode</a>
+            </li>
+            <li>
+                <a href="#example">Example</a>
+            </li>
+            <li>
+                <a href="#clicks">Clicks</a>
+            </li>
+            <li>
+                <a href="#feedbacks">Feedbacks</a>
+            </li>
+            <li>
+                <a href="#feedback-example">Feedback Example</a>
+            </li>
+            <li>
+                <a href="#logs">Logs</a>
+            </li>
+        </ul>
+    </div>
 
-<h3>Logs</h3>
+    <div class="col-25">
+        <canvas id="chart" width="300" height="150" style="width: 300px; height: 150px;"></canvas>
 
-<ul class="logs">
-    {% for log in entity.logs %}
-    <li>
-        {{ log.created|date('Y-m-d H:i:s') }}
-    </li>
-    {% endfor %}
-</ul>
+        <table class="records_list">
+            <tbody>
+                <tr>
+                    <td class="label">Views</td>
+                    <td class="count">{{ entity.logs|length }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Clicks</td>
+                    <td class="count">{{ entity.clicks|length }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Feedbacks</td>
+                    <td class="count">{{ entity.feedbacks|length }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="clear" id="embed-code">EmbedCode</h3>
+    <code>
+        {{ embedCode }}
+    </code>
+
+    <h3 id="example">Example</h3>
+    {{ embedCode|raw }}
+
+    <h3 id="clicks">Clicks</h3>
+
+    <ul class="clicks">
+        {% for click in entity.clicks %}
+        <li>
+            {{ click.created|date('Y-m-d H:i:s') }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3 id="feedbacks">Feedbacks</h3>
+
+    <ul class="feedbacks">
+        {% for feedback in entity.feedbacks %}
+        <li>
+            {{ feedback.created|date('Y-m-d H:i:s') }}, {{ feedback.rating }}, {{ feedback.message }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div id="feedback-example" class="example-form">
+        <strong>Example Feedback Form:</strong>
+        {{ form_start(feedbackForm) }}
+        {{ form_widget(feedbackForm) }}
+        {{ form_end(feedbackForm) }}
+    </div>
+
+    <h3 id="logs">Logs</h3>
+
+    <ul class="logs">
+        {% for log in entity.logs %}
+        <li>
+            {{ log.created|date('Y-m-d H:i:s') }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

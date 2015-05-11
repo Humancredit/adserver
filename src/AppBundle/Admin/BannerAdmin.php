@@ -16,6 +16,7 @@ class BannerAdmin extends Admin
     {
         $formMapper->with('Banner');
         $formMapper->add('title', 'text');
+        $formMapper->add('url', 'text');
         $formMapper->add('path', 'text', array('read_only' => true));
         $formMapper->add('file', 'file', array('required' => false));
         $formMapper->end();

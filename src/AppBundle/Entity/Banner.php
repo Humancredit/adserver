@@ -29,6 +29,12 @@ class Banner
     private $title;
 
     /**
+     * @ORM\Column(type="string", length=4096, nullable=true)
+     * @var string
+     */
+    private $url;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
@@ -52,6 +58,16 @@ class Banner
      * @ORM\OneToMany(targetEntity="BannerLog", mappedBy="banner")
      */
     private $logs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BannerClick", mappedBy="banner")
+     */
+    private $clicks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BannerFeedback", mappedBy="banner")
+     */
+    private $feedbacks;
 
     /**
      * @Assert\File(maxSize="6000000", mimeTypes={"image/*"})
@@ -293,6 +309,31 @@ class Banner
     public function __construct()
     {
         $this->logs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->clicks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->feedbacks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Banner
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     /**
@@ -321,11 +362,76 @@ class Banner
     /**
      * Get logs
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getLogs()
     {
         return $this->logs;
     }
 
+    /**
+     * Add clicks
+     *
+     * @param \AppBundle\Entity\BannerClick $clicks
+     * @return Banner
+     */
+    public function addClick(\AppBundle\Entity\BannerClick $clicks)
+    {
+        $this->clicks[] = $clicks;
+
+        return $this;
+    }
+
+    /**
+     * Remove clicks
+     *
+     * @param \AppBundle\Entity\BannerClick $clicks
+     */
+    public function removeClick(\AppBundle\Entity\BannerClick $clicks)
+    {
+        $this->clicks->removeElement($clicks);
+    }
+
+    /**
+     * Get clicks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClicks()
+    {
+        return $this->clicks;
+    }
+
+    /**
+     * Add feedbacks
+     *
+     * @param \AppBundle\Entity\BannerFeedback $feedbacks
+     * @return Banner
+     */
+    public function addFeedback(\AppBundle\Entity\BannerFeedback $feedbacks)
+    {
+        $this->feedbacks[] = $feedbacks;
+
+        return $this;
+    }
+
+    /**
+     * Remove feedbacks
+     *
+     * @param \AppBundle\Entity\BannerFeedback $feedbacks
+     */
+    public function removeFeedback(\AppBundle\Entity\BannerFeedback $feedbacks)
+    {
+        $this->feedbacks->removeElement($feedbacks);
+    }
+
+    /**
+     * Get feedbacks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeedbacks()
+    {
+        return $this->feedbacks;
+    }
 }

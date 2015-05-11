@@ -12,6 +12,8 @@
                 <th>Category</th>
                 <th>Brand</th>
                 <th>Views</th>
+                <th>Clicks</th>
+                <th>Feedbacks</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -23,6 +25,8 @@
                 <td>{{ entity.category }}</td>
                 <td>{{ entity.brand }}</td>
                 <td class="count">{{ entity.logs|length }}</td>
+                <td>{{ entity.clicks|length }}</td>
+                <td>{{ entity.feedbacks|length }}</td>
                 <td>
                 <ul>
                     <li>

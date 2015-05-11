@@ -1,8 +1,16 @@
-.logs {
+.toc {
+    padding-left: 40px;
+}
+
+.toc * {
+    font-size: 20px;
+}
+
+.logs, .clicks, .feedbacks {
     padding-left: 20px;
 }
 
-.logs li {
+.logs li, .clicks li, .feedbacks li {
     font-size: 20px;
 }
 
@@ -27,4 +35,32 @@
 
 .clear {
     clear: both;
+}
+
+code {
+    font-size: 11px !important;
+    line-height: 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    display: block;
+}
+
+.example-form form {
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.example-form label {
+    clear: both;
+    display: inline-block;
+    width: 200px;
+}
+
+.example-form * {
+    font-size: 20px;
 }
