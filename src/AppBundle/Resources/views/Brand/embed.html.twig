@@ -7,18 +7,21 @@
                 margin: 0;
                 padding: 0;
                 border: 0;
-                overflow: hidden;
             }
 
             .hide {
-                display: none
+                display: none;
+            }
+
+            img {
+                display: block;
             }
         </style>
     </head>
 
     <body>
         <a target="_top" href="{{ signedLink }}">
-            <img src="{{ signedImage }}" />
+            <img width="728" height="90" src="{{ signedImage }}" />
         </a>
         <a href="{{ signedFeedback }}" class="hide">Feedback</a>
     </body>

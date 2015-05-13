@@ -48,7 +48,7 @@ class BrandController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Brand entity.');
         }
-        
+
         $data = array('entity' => $entity);
         $bannerCount = $entity->getBanners()->count();
         if ($bannerCount) {
@@ -92,4 +92,5 @@ class BrandController extends Controller
         }
         return array('entity' => $entity);
     }
+
 }

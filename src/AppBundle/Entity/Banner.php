@@ -46,7 +46,7 @@ class Banner
      * @var \AppBundle\Entity\Campaign
      */
     private $campaign;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="banners")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
@@ -336,7 +336,7 @@ class Banner
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -369,7 +369,7 @@ class Banner
     /**
      * Get logs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLogs()
     {
@@ -402,7 +402,7 @@ class Banner
     /**
      * Get clicks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getClicks()
     {
@@ -435,7 +435,7 @@ class Banner
     /**
      * Get feedbacks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFeedbacks()
     {
@@ -458,10 +458,11 @@ class Banner
     /**
      * Get campaign
      *
-     * @return \AppBundle\Entity\Campaign 
+     * @return \AppBundle\Entity\Campaign
      */
     public function getCampaign()
     {
         return $this->campaign;
     }
+
 }
