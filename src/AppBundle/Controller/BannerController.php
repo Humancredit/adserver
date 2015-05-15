@@ -173,7 +173,16 @@ class BannerController extends Controller
         $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
 
         // image url
-        $url = $webroot.$entity->getWebPath();
+        $scheme = $this->get('router')->getContext()->getScheme();
+        $port = '';
+        if ('http' === $scheme && 80 != $this->get('router')->getContext()->getHttpPort()) {
+            $port = ':'.$this->get('router')->getContext()->getHttpPort();
+        } elseif ('https' === $scheme && 443 != $this->get('router')->getContext()->getHttpsPort()) {
+            $port = ':'.$this->get('router')->getContext()->getHttpsPort();
+        }
+
+        $url = $scheme."://".$this->get('router')->getContext()->getHost();
+        $url .= $port.$webroot.$entity->getWebPath();
         $url .= "?ct=".$entity->getCategory()->getSlug();
         $url .= "&br=".$entity->getBrand()->getSlug();
         $signedImage = $this->get('app.utils')->generateSignedUrl($url, $key);
