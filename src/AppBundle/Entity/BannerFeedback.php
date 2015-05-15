@@ -119,7 +119,6 @@ class BannerFeedback
         return $this->banner;
     }
 
-
     /**
      * Set rating
      *
@@ -136,7 +135,7 @@ class BannerFeedback
     /**
      * Get rating
      *
-     * @return integer 
+     * @return integer
      */
     public function getRating()
     {
@@ -159,10 +158,11 @@ class BannerFeedback
     /**
      * Get message
      *
-     * @return string 
+     * @return string
      */
     public function getMessage()
     {
         return $this->message;
     }
+
 }

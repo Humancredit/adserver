@@ -138,18 +138,15 @@ class BannerController extends Controller
             throw $this->createNotFoundException('Unable to find Banner entity.');
         }
 
-        $form = $this->createForm(new BannerFeedbackType());
-        $form->handleRequest($request);
-        $response = new \stdClass();
-        $response->result = 'error';
-
-        if ($form->isValid()) {
-            $feedback = $form->getData();
-            $feedback->setBanner($entity);
-            $em->persist($feedback);
-            $em->flush();
-            $response->result = 'ok';
-        }
+        // :TODO: validation
+        $feedback = new BannerFeedback();
+        $feedback->setMessage(trim(strip_tags(stripslashes($_POST['ms']))));
+        $feedback->setRating(intval($_POST['rt']));
+        $feedback->setBanner($entity);
+        $em->persist($feedback);
+        $em->flush();
+        $response = new \stdClass;
+        $response->result = 'ok';
 
         $response = new Response(json_encode($response));
         $response->headers->set('Content-Type', 'application/json');
