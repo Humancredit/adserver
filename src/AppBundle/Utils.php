@@ -19,7 +19,7 @@ class Utils
         $pkeyid = openssl_pkey_get_private($key);
         openssl_sign($url, $signature, $pkeyid, "sha256WithRSAEncryption");
         openssl_free_key($pkeyid);
-        return $url.(strpos($url, "?") !== false ? "&" : "?")."sg=".bin2hex($signature);
+        return $url.(strpos($url, "?") !== false ? "&" : "?")."hc_ad_sg=".bin2hex($signature);
     }
 
     /**
