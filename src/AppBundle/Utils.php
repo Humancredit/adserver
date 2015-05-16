@@ -28,7 +28,7 @@ class Utils
     public function generateEmbedCode($url, $key)
     {
         $url = $this->generateSignedUrl($url, $key);
-        return '<iframe class="humancredit" seamless="seamless" frameborder="0" style="width:728px;height:90px" scrolling="no" src="'.$url.'"></iframe>';
+        return '<iframe class="humancredit" seamless="seamless" frameborder="0" style="width:940px;height:250px" scrolling="no" src="'.$url.'"></iframe>';
     }
 
 }
