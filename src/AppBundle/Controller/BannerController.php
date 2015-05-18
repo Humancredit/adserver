@@ -70,7 +70,7 @@ class BannerController extends Controller
         $url = $this->get('router')->generate('banner_embed', array('id' => $entity->getId()), true);
         $url .= "?ct=".$entity->getCategory()->getSlug();
         $url .= "&br=".$entity->getBrand()->getSlug();
-        $embedCode = $this->get('app.utils')->generateEmbedCode($url, $key);
+        $embedCode = $this->get('app.utils')->generateEmbedCode($url, $entity->getWidth(), $entity->getHeight(), $key);
 
         // put everything together
         return array(

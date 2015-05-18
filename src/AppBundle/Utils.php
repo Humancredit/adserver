@@ -25,10 +25,10 @@ class Utils
     /**
      *
      */
-    public function generateEmbedCode($url, $key)
+    public function generateEmbedCode($url, $width, $height, $key)
     {
         $url = $this->generateSignedUrl($url, $key);
-        return '<iframe class="humancredit" seamless="seamless" frameborder="0" style="width:940px;height:250px" scrolling="no" src="'.$url.'"></iframe>';
+        return '<iframe class="humancredit" seamless="seamless" frameborder="0" style="width:'.$width.'px;height:'.$height.'px" scrolling="no" src="'.$url.'"></iframe>';
     }
 
 }

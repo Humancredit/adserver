@@ -14,8 +14,15 @@ class CampaignAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->with('Campaign');
         $formMapper->add('title', 'text');
         $formMapper->add('slug');
+        $formMapper->end();
+
+        $formMapper->with('Size');
+        $formMapper->add('width');
+        $formMapper->add('height');
+        $formMapper->end();
     }
 
     /**
@@ -34,6 +41,8 @@ class CampaignAdmin extends Admin
     {
         $listMapper->addIdentifier('title');
         $listMapper->addIdentifier('slug');
+        $listMapper->addIdentifier('width');
+        $listMapper->addIdentifier('height');
     }
 
 }

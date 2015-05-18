@@ -14,8 +14,15 @@ class BrandAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->with('Brand');
         $formMapper->add('name', 'text');
         $formMapper->add('slug', 'text');
+        $formMapper->end();
+
+        $formMapper->with('Size');
+        $formMapper->add('width');
+        $formMapper->add('height');
+        $formMapper->end();
     }
 
     /**
@@ -34,6 +41,8 @@ class BrandAdmin extends Admin
     {
         $listMapper->addIdentifier('name');
         $listMapper->addIdentifier('slug');
+        $listMapper->addIdentifier('width');
+        $listMapper->addIdentifier('height');
     }
 
 }

@@ -21,6 +21,11 @@ class BannerAdmin extends Admin
         $formMapper->add('file', 'file', array('required' => false));
         $formMapper->end();
 
+        $formMapper->with('Size');
+        $formMapper->add('width');
+        $formMapper->add('height');
+        $formMapper->end();
+
         $formMapper->with('Relations');
         $formMapper->add('campaign');
         $formMapper->add('category');
@@ -47,6 +52,8 @@ class BannerAdmin extends Admin
     {
         $listMapper->addIdentifier('id');
         $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('width');
+        $listMapper->addIdentifier('height');
         $listMapper->addIdentifier('campaign');
         $listMapper->addIdentifier('category');
         $listMapper->addIdentifier('brand');

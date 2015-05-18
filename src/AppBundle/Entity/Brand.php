@@ -36,6 +36,18 @@ class Brand
     private $slug;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $width = 940;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $height = 250;
+
+    /**
      * @ORM\OneToMany(targetEntity="Banner", mappedBy="brand")
      */
     private $banners;
@@ -56,11 +68,10 @@ class Brand
         return $this->getName();
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +94,7 @@ class Brand
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -116,7 +127,7 @@ class Brand
     /**
      * Get banners
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBanners()
     {
@@ -139,10 +150,57 @@ class Brand
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
     }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     * @return Brand
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     * @return Brand
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
 }

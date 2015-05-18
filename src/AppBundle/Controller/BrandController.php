@@ -56,7 +56,7 @@ class BrandController extends Controller
             $key = "file://".$this->get('kernel')->getRootDir().'/data/private.key';
             $url = $this->get('router')->generate('category_embed', array('id' => $entity->getId()), true);
             $url .= '?br='.$entity->getSlug();
-            $data['embedCode'] = $this->get('app.utils')->generateEmbedCode($url, $key);
+            $data['embedCode'] = $this->get('app.utils')->generateEmbedCode($url, $entity->getWidth(), $entity->getHeight(), $key);
         }
 
         return $data;

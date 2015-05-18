@@ -86,6 +86,18 @@ class Banner
      */
     private $oldPath;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $width = 940;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $height = 250;
+
     // ----- additional methods ------------------------------------------------
     /**
      *
@@ -463,6 +475,52 @@ class Banner
     public function getCampaign()
     {
         return $this->campaign;
+    }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     * @return Banner
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     * @return Banner
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+        return $this->height;
     }
 
 }

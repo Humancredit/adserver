@@ -36,6 +36,18 @@ class Category
     private $slug;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $width = 940;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $height = 250;
+
+    /**
      * @ORM\OneToMany(targetEntity="Banner", mappedBy="category")
      */
     private $banners;
@@ -145,4 +157,50 @@ class Category
         return $this->banners;
     }
 
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     * @return Category
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer 
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     * @return Category
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer 
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
 }

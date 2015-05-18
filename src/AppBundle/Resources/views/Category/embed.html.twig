@@ -21,7 +21,7 @@
 
     <body>
         <a target="_top" href="{{ signedLink }}">
-            <img alt="id '{{ banner.id }}', ct '{{ banner.category }}', br '{{ banner.brand }}', cp '{{ banner.campaign }}'" width="940" height="250" src="{{ signedImage }}" />
+            <img alt="id '{{ banner.id }}', ct '{{ banner.category }}', br '{{ banner.brand }}', cp '{{ banner.campaign }}'" width="{{ banner.width }}" height="{{ banner.height }}" src="{{ signedImage }}" />
         </a>
         <a href="{{ signedFeedback }}" class="hide">Feedback</a>
     </body>
